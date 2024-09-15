@@ -11,11 +11,18 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    { '\\', ':Neotree toggle<CR>', desc = 'Toggle NeoTree', silent = true },
+    { '<C-f>', ':Neotree focus<CR>', desc = 'Focus NeoTree', silent = true },
   },
   opts = {
     filesystem = {
+      filtered_items = {
+        visible = true, -- This is what you want: If you set this to `true`, all "hide" just mean "dimmed out"
+        hide_dotfiles = false,
+        hide_gitignored = true,
+      },
       window = {
+        position = 'right',
         mappings = {
           ['\\'] = 'close_window',
         },
