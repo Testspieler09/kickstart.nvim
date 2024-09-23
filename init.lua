@@ -261,6 +261,18 @@ require('lazy').setup({
     vim.keymap.set('n', '<F8>', vim.cmd.TagbarToggle),
   },
   {
+    'barrett-ruth/live-server.nvim',
+    build = 'npm install -g live-server',
+    cmd = { 'LiveServerStart', 'LiveServerStop' },
+    config = true,
+  },
+  {
+    'olrtg/nvim-emmet',
+    config = function()
+      vim.keymap.set({ 'n', 'v' }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
+    end,
+  },
+  {
     'tribela/vim-transparent',
   },
 
@@ -749,12 +761,12 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -837,7 +849,30 @@ require('lazy').setup({
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
           },
+          {
+            name = 'ctags',
+            -- default values
+            option = {
+              executable = 'ctags',
+              trigger_characters = { '.' },
+              trigger_characters_ft = {
+                c = { '.', '->' },
+                perl = { '->', '::' },
+              },
+            },
+          },
+          { name = 'calc' },
+          {
+            name = 'latex_symbols',
+            option = {
+              strategy = 0, -- mixed
+            },
+          },
+          { name = 'nerdfont' },
           { name = 'nvim_lsp' },
+          { name = 'fuzzy_buffer' },
+          { name = 'fuzzy_path' },
+          { name = 'rg' },
           { name = 'luasnip' },
           { name = 'path' },
         },
