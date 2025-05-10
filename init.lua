@@ -173,6 +173,12 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.api.nvim_set_keymap(
+  'n',
+  '<leader>l',
+  '<cmd>lua vim.diagnostic.open_float(nil, {scope="line"})<CR>',
+  { noremap = true, silent = true, desc = 'Show the diagnostic of the current [L]ine' }
+)
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -257,6 +263,13 @@ require('lazy').setup({
   },
 
   {
+    'chomosuke/typst-preview.nvim',
+    lazy = false, -- or ft = 'typst'
+    version = '1.*',
+    opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+  },
+
+  {
     'norcalli/nvim-colorizer.lua',
     config = function()
       require('colorizer').setup {
@@ -284,6 +297,7 @@ require('lazy').setup({
       { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>' },
       { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
     },
+    'ThePrimeagen/vim-be-good',
   },
 
   { -- NOTE: Tagbar for displaying variable names etc.
@@ -304,6 +318,16 @@ require('lazy').setup({
   },
   {
     'tribela/vim-transparent',
+  },
+  {
+    'lervag/vimtex',
+    lazy = false, -- we don't want to lazy load VimTeX
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+    init = function()
+      -- VimTeX configuration goes here, e.g.
+      vim.g.vimtex_view_method = 'zathura'
+      vim.g.vimtex_view_zathura_use_synctex = 0
+    end,
   },
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
